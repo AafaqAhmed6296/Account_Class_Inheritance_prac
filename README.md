@@ -1,13 +1,13 @@
 # Account_Class_Inheritance_prac
 You are provided with a simple Account class hierarchy that contains
-**Account - Base class  **
-**Savings Account - Derived class  **
+***Account - Base class***  
+***Savings Account - Derived class***
 
 An Account has a name and a balance.  
 A Savings Account is an Account and adds an interest rate.  
 
-Checking account - Derived class  
-Trust account - Derived class  
+***Checking account - Derived class***  
+***Trust account - Derived class***  
 
 A Checking account has a name and a balance and has a fee of $1.50 per withdrawal transaction.  
 Every withdrawal transaction will be assessed this flat fee.  
