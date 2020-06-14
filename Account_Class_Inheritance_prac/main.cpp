@@ -120,7 +120,42 @@ bool CheckingAccount::withdraw(double amount){
     }
 }
 
+class TrustAccount: public SavingAccount {
 
+public:
+    TrustAccount(string name = "UnnamedTrustAccount", double balance = 0.0, double intRate = 0.0);
+    bool deposit(double amount);
+    bool withdraw(double amount);
+};
+
+TrustAccount::TrustAccount(string name, double balance, double intRate)
+:SavingAccount{name,balance,intRate} {
+    
+}
+
+bool TrustAccount::deposit(double amount){
+    if(amount > 0){
+        if (amount >= 5000)
+            balance += amount + 50;
+        else
+            balance += amount;
+        return true;
+    }else{
+        return false;
+    }
+}
+
+bool TrustAccount::withdraw(double amount){
+    static int times = 1;
+    double percentageOfBalance = balance * 0.2;
+    
+    if (balance-amount >= 0 && times <= 3 && amount < percentageOfBalance) {
+        balance -= amount;
+        return true;
+    }else{
+        return false;
+    }
+}
 
 int main(){
     
