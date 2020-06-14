@@ -9,7 +9,7 @@
 #include <iostream>
 using namespace std;
 class Account {
-    friend ostream &operator<<(ostream& os,Account & account);
+    friend ostream &operator<<(ostream& os,const Account & account);
 private:
     static constexpr const char * def_name = "Unnamed Account";
     static constexpr double def_balance = 0.0;
@@ -56,7 +56,7 @@ double Account::get_balance() const {
     return balance;
 }
 
-ostream &operator<<(ostream& os, Account& account) {
+ostream &operator<<(ostream& os,const Account& account) {
     os << "[Account: "<< account.name << ":" << account.balance << "]";
     return os;
 }
@@ -65,11 +65,12 @@ ostream &operator<<(ostream& os, Account& account) {
 //MARK: - Saving Account
 
 class SavingAccount: public Account {
-    friend ostream &operator<<(ostream& os,SavingAccount & account);
+    friend ostream &operator<<(ostream& os,const SavingAccount & account);
 private:
 //    static constexpr const char * defName = "Unnamed Saving account";
 //    static constexpr const double defBalance = 0.0;
 //    static constexpr const double defIntRate = 0.0;
+// These upper three lines are commented to ellaborate the upper explanation that was in Saving account.
 protected:
     double intRate;
 public:
@@ -78,6 +79,24 @@ public:
     bool deposit(double amount);
     //Inherits the Account::withdraw function
 };
+
+SavingAccount::SavingAccount(std::string name, double balance, double intRate)
+    : Account {name, balance}, intRate{intRate} {
+}
+
+// Deposit:
+//      Amount supplied to deposit will be incremented by (amount * intRate/100)
+//      and then the updated amount will be deposited
+//
+bool SavingAccount::deposit(double amount) {
+    amount += amount * (intRate/100);
+    return Account::deposit(amount);
+}
+
+std::ostream &operator<<(std::ostream &os, const SavingAccount &account) {
+    os << "[SavingAccount: " << account.name << ": " << account.balance << ", " << account.intRate << "%]";
+    return os;
+}
 
 int main(){
     
