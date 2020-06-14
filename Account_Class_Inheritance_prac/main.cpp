@@ -24,7 +24,7 @@ protected:
 public:
     Account(string name = def_name, double balance = def_balance);
 //    Account(string name = "Unnamed Account", double balance = 0.0);
-    bool deposite(double ammount);
+    bool deposit(double ammount);
     bool withdraw(double ammount);
     double get_balance() const;
 };
@@ -34,7 +34,7 @@ Account::Account(string name, double balance)
     
 }
 
-bool Account::deposite(double amount) {
+bool Account::deposit(double amount) {
     if (amount < 0) {
         return false;
     }else{
@@ -60,7 +60,24 @@ ostream &operator<<(ostream& os, Account& account) {
     os << "[Account: "<< account.name << ":" << account.balance << "]";
     return os;
 }
-/* In case if you don't know operator overloading, what this operator<< function is doing is it would cout any object of Account class directly withour using any display function */
+/* In case if you don't know operator overloading, what this operator<< function is doing, it would cout any object of Account class directly withour using any display function */
+
+//MARK: - Saving Account
+
+class SavingAccount: public Account {
+    friend ostream &operator<<(ostream& os,SavingAccount & account);
+private:
+//    static constexpr const char * defName = "Unnamed Saving account";
+//    static constexpr const double defBalance = 0.0;
+//    static constexpr const double defIntRate = 0.0;
+protected:
+    double intRate;
+public:
+//    SavingAccount(string name = defName, double balance = defBalance, double intRate = defIntRate);
+    SavingAccount(string name = "Unnamed Saving account", double balance = 0.0, double intRate = 0.0);
+    bool deposit(double amount);
+    //Inherits the Account::withdraw function
+};
 
 int main(){
     
