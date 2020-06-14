@@ -81,7 +81,7 @@ public:
 };
 
 SavingAccount::SavingAccount(std::string name, double balance, double intRate)
-    : Account {name, balance}, intRate{intRate} {
+: Account {name, balance}, intRate{intRate} {
 }
 
 // Deposit:
@@ -97,6 +97,30 @@ std::ostream &operator<<(std::ostream &os, const SavingAccount &account) {
     os << "[SavingAccount: " << account.name << ": " << account.balance << ", " << account.intRate << "%]";
     return os;
 }
+
+class CheckingAccount: public Account {
+
+public:
+    CheckingAccount(string name = "UnnameCheckingAccount", double balance = 0.0);
+    bool withdraw(double amount);
+    //Inherits the Account::deposit
+};
+
+CheckingAccount::CheckingAccount(string name, double balance)
+:Account{name,balance} {
+    
+}
+
+bool CheckingAccount::withdraw(double amount){
+    if (balance-amount >= 0) {
+        balance -= amount - 1.5;
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
 
 int main(){
     
