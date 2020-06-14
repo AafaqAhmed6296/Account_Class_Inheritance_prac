@@ -1,5 +1,5 @@
 # Account_Class_Inheritance_prac
-You are provided with a simple Account class hierarchy that contains
+You are provided with a simple Account class hierarchy that contains  
 ***Account - Base class***  
 ***Savings Account - Derived class***
 
