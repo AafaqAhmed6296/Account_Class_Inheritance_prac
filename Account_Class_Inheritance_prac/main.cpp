@@ -121,7 +121,7 @@ bool CheckingAccount::withdraw(double amount){
 }
 
 class TrustAccount: public SavingAccount {
-
+    int times = 1;
 public:
     TrustAccount(string name = "UnnamedTrustAccount", double balance = 0.0, double intRate = 0.0);
     bool deposit(double amount);
@@ -146,11 +146,12 @@ bool TrustAccount::deposit(double amount){
 }
 
 bool TrustAccount::withdraw(double amount){
-    static int times = 1;
+
     double percentageOfBalance = balance * 0.2;
-    
+    cout << times << endl;
     if (balance-amount >= 0 && times <= 3 && amount < percentageOfBalance) {
         balance -= amount;
+        times++;
         return true;
     }else{
         return false;
@@ -158,6 +159,37 @@ bool TrustAccount::withdraw(double amount){
 }
 
 int main(){
+    TrustAccount acc1;
+    if (acc1.deposit(20000)) {
+        cout << "deposit successfull" << endl;
+    }else
+        cout << "Error depositing..." << endl;
     
+    if (acc1.withdraw(4000)) {
+        cout << "Withdrawn successfully" <<endl;
+    }else
+        cout << "Error occur while withdrawn." << endl;
+    
+    
+    if (acc1.withdraw(200)) {
+        cout << "Withdrawn successfully" <<endl;
+    }else
+        cout << "Error occur while withdrawn." << endl;
+    
+    
+    if (acc1.withdraw(3000)) {
+        cout << "Withdrawn successfully" <<endl;
+    }else
+        cout << "Error occur while withdrawn." << endl;
+    
+    
+    if (acc1.withdraw(2000)) {
+        cout << "Withdrawn successfully" <<endl;
+    }else
+        cout << "Error occur while withdrawn." << endl;
+    
+    
+    TrustAccount acc2;
+    acc2.withdraw(5);
     return 0;
 }
