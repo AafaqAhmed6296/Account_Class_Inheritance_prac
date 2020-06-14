@@ -26,11 +26,41 @@ public:
 //    Account(string name = "Unnamed Account", double balance = 0.0);
     bool deposite(double ammount);
     bool withdraw(double ammount);
-    
+    double get_balance() const;
 };
 
+Account::Account(string name, double balance)
+:name{name}, balance{balance} {
+    
+}
 
+bool Account::deposite(double amount) {
+    if (amount < 0) {
+        return false;
+    }else{
+        balance += amount;
+        return true;
+    }
+}
 
+bool Account::withdraw(double amount){
+    if (balance-amount >= 0) {
+        balance -= amount;
+        return true;
+    }else{
+        return false;
+    }
+}
+
+double Account::get_balance() const {
+    return balance;
+}
+
+ostream &operator<<(ostream& os, Account& account) {
+    os << "[Account: "<< account.name << ":" << account.balance << "]";
+    return os;
+}
+/* In case if you don't know operator overloading, what this operator<< function is doing is it would cout any object of Account class directly withour using any display function */
 
 int main(){
     
